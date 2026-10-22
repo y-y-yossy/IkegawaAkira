@@ -34,7 +34,7 @@ export default function Home({ events, notifications, news, books }: Props) {
       <main className="relative overflow-x-hidden ">
         {/*  Section: ファーストビュー  ===========================================================  */}
         <div className="w-screen container mx-auto">
-          <div className="relative h-[350px]">
+          <div className="relative h-[350px] lg:h-[460px]">
             <div className="text-orange mx-5 relative z-30">
               <h2 className="text-xs tracking-[.5em] my-3 font-light lg:text-base">
                 AKIRA IKEGAWA
@@ -53,7 +53,7 @@ export default function Home({ events, notifications, news, books }: Props) {
                 priority={true}
               />
             </div>
-            <div className="absolute w-11/12 right-0 mt-[-60px] z-0 md:w-[700px] md:mt-[-180px]">
+            <div className="absolute w-11/12 right-0 mt-[-60px] z-0 md:w-[700px] md:mt-[-180px] lg:w-[768px] lg:mt-[-140px]">
               <Image
                 className="md:hidden lg:hidden"
                 src="/assets/image/home/ikegawa_sp.png"
