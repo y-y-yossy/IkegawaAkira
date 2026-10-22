@@ -65,6 +65,50 @@ const Header = () => {
               </Link>
             </div>
             <ul className="relative top-32 gap-8 flex flex-col text-xl px-3 text-white lg:top-60 md:grid md:grid-cols-2">
+              <li>
+                <Link
+                  className="align-sub"
+                  href="/profile"
+                  onClick={handleMenuOpen}
+                >
+                  <p>ごあいさつ</p>
+                  <span className="text-xs">PROFILE</span>
+                </Link>
+              </li>
+              {/* NEWSメニュー */}
+              <li>
+                <Link
+                  className="align-sub"
+                  href="/news/list"
+                  onClick={handleMenuOpen}
+                >
+                  <p>ニュース</p>
+                  <span className="text-xs">NEWS</span>
+                </Link>
+              </li>
+              {/* Notificationメニュー */}
+              <li>
+                <Link
+                  className="align-sub"
+                  href="/notification/list"
+                  onClick={handleMenuOpen}
+                >
+                  <p>お知らせ</p>
+                  <span className="text-xs">NOTIFICATION</span>
+                </Link>
+              </li>
+
+              {/* Booksメニュー */}
+              <li>
+                <Link
+                  className="align-sub"
+                  href="/books/list"
+                  onClick={handleMenuOpen}
+                >
+                  <p>書籍一覧</p>
+                  <span className="text-xs">BOOKS</span>
+                </Link>
+              </li>
 
               {/*  Contactメニュー */}
               <li>
