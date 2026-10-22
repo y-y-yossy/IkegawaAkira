@@ -179,8 +179,11 @@ export default function Home({
                       </div>
                     </div>
                     <div className="mx-3">
-                      <div className="min-h-[75px] my-8 md:my-16 mx-10 line-clamp-3">
-                        {info.title}
+                      <div className="h-[96px] my-8 md:my-16 mx-10 overflow-hidden">
+                        <p className="font-bold text-naby line-clamp-1">
+                          {info.title}
+                        </p>
+                        <p className="text-sm mt-1 line-clamp-3">{info.body}</p>
                       </div>
                       <div className="w-full mb-1 -mt-8">
                         <Image
