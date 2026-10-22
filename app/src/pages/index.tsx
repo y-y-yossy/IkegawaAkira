@@ -179,7 +179,7 @@ export default function Home({
                       </div>
                     </div>
                     <div className="mx-3">
-                      <div className="h-[96px] my-8 md:my-16 mx-10 overflow-hidden">
+                      <div className="h-[96px] mt-8 mb-6 md:mt-16 md:mb-8 mx-10 overflow-hidden">
                         <p className="font-bold text-naby line-clamp-2">
                           {info.title}
                         </p>
