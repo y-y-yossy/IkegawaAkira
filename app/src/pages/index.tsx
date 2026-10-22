@@ -178,7 +178,7 @@ export default function Home({ events, notifications, news, books }: Props) {
                   </tbody>
                 </table>
                 <p className="mt-6 text-sm md:text-lg">
-                  <span className="text-orange font-bold mr-3">休診日</span>
+                  <span className="text-naby font-bold mr-3">休診日</span>
                   {closedDays}
                 </p>
                 <ul className="mt-4 text-xs leading-relaxed list-disc pl-5 md:text-sm">
