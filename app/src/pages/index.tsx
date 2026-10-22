@@ -180,10 +180,10 @@ export default function Home({
                     </div>
                     <div className="mx-3">
                       <div className="h-[96px] my-8 md:my-16 mx-10 overflow-hidden">
-                        <p className="font-bold text-naby line-clamp-1">
+                        <p className="font-bold text-naby line-clamp-2">
                           {info.title}
                         </p>
-                        <p className="text-sm mt-1 line-clamp-3">{info.body}</p>
+                        <p className="text-sm mt-1 line-clamp-2">{info.body}</p>
                       </div>
                       <div className="w-full mb-1 -mt-8">
                         <Image
