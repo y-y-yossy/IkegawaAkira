@@ -13,6 +13,22 @@ import Image from "next/image";
 import SectionTitle from "../components/common/SectionTitle";
 import { useEffect } from "react";
 
+// 池川クリニックの診察日・休診日（旧ホームページ ikegawaclinic.net の掲載内容）
+const scheduleDays = ["月", "火", "水", "木", "金", "土", "日・祝"];
+
+const schedule = [
+  { label: "午前", time: "9:30〜12:00", open: [1, 1, 1, 0, 1, 1, 0] },
+  { label: "午後", time: "15:00〜17:00", open: [0, 0, 1, 0, 0, 0, 0] },
+];
+
+const closedDays = "木曜・日曜・祝日・年末年始";
+
+const scheduleNotes = [
+  "学会出席などのため臨時休診があります。",
+  "診療の予約制はとっておりません。予防接種のみ事前に電話でご予約ください（受付 平日12:00〜14:00）。",
+  "分娩の取り扱いはしておりません。妊婦健診・産後健診・母乳ケアは引き続き行います。",
+];
+
 type Props = {
   events: Array<Event>;
   notifications: Array<Notification>;
@@ -109,6 +125,72 @@ export default function Home({ events, notifications, news, books }: Props) {
                 </Link>
               );
             })}
+          </div>
+        </div>
+
+        {/*  Section: 診察日・休診日（固定）  ===========================================================  */}
+        <>
+          <SectionTitle
+            title="診察日・休診日"
+            subtitle="SCHEDULE"
+            complementaryColor={false}
+          />
+        </>
+
+        <div className="container mx-auto">
+          <div className="w-11/12 lg:w-3/4 mx-auto border border-orange rounded-xl bg-white py-8">
+            <div className="w-11/12 mx-auto">
+              <table className="w-full text-naby text-center text-sm md:text-lg">
+                <thead>
+                  <tr className="border-b-2 border-orange">
+                    <th className="py-3"></th>
+                    {scheduleDays.map((day) => (
+                      <th key={day} className="py-3 font-bold">
+                        {day}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {schedule.map((row) => (
+                    <tr key={row.label} className="border-b border-orange">
+                      <th className="py-4 text-left font-bold whitespace-nowrap">
+                        {row.label}
+                        <span className="block text-[10px] font-normal text-pale_gray md:text-sm">
+                          {row.time}
+                        </span>
+                      </th>
+                      {row.open.map((isOpen, i) => (
+                        <td
+                          key={i}
+                          className={
+                            isOpen
+                              ? "py-4 text-orange text-lg md:text-2xl"
+                              : "py-4 text-pale_gray text-lg md:text-2xl"
+                          }
+                        >
+                          {isOpen ? "○" : "／"}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <p className="mt-6 text-sm md:text-lg">
+                <span className="text-orange font-bold mr-3">休診日</span>
+                {closedDays}
+              </p>
+              <ul className="mt-4 text-xs leading-relaxed list-disc pl-5 md:text-sm">
+                {scheduleNotes.map((note) => (
+                  <li key={note}>{note}</li>
+                ))}
+              </ul>
+              <div className="mt-6 pt-4 border-t border-orange text-sm md:text-base">
+                <p className="font-bold text-naby">池川クリニック</p>
+                <p>〒236-0035 横浜市金沢区大道2-5-13</p>
+                <p>TEL 045-786-1122</p>
+              </div>
+            </div>
           </div>
         </div>
 
