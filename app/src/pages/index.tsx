@@ -4,6 +4,7 @@ import type { Notification } from "@/src/types/Notification";
 import type { News } from "../types/News";
 import type { Books } from "../types/Books";
 import type { Event } from "../types/Events";
+import type { ClinicInfo } from "../types/ClinicInfo";
 
 import Head from "next/head";
 import Seo from "../components/Seo";
@@ -31,12 +32,19 @@ const scheduleNotes = [
 
 type Props = {
   events: Array<Event>;
+  clinicInfos: Array<ClinicInfo>;
   notifications: Array<Notification>;
   news: Array<News>;
   books: Array<Books>;
 };
 
-export default function Home({ events, notifications, news, books }: Props) {
+export default function Home({
+  events,
+  clinicInfos,
+  notifications,
+  news,
+  books,
+}: Props) {
   return (
     <>
       <Seo
@@ -126,6 +134,84 @@ export default function Home({ events, notifications, news, books }: Props) {
               );
             })}
           </div>
+        </div>
+
+        {/*  Section: クリニックからのご案内  ===========================================================  */}
+        <>
+          <SectionTitle
+            title="クリニックからのご案内"
+            subtitle="INFORMATION"
+            complementaryColor={false}
+          />
+        </>
+
+        <div className="flex snap-x snap-mandatory overflow-scroll pl-3 hidden-scrollbar container mx-auto">
+          {clinicInfos.map((info) => {
+            const year = new Date(info.date).getFullYear();
+            const date = new Date(info.date)
+              .toLocaleString("ja-JP-u-ca-japanese", {
+                month: "2-digit",
+                day: "2-digit",
+                timeZone: "Asia/Tokyo",
+              })
+              .toString()
+              .replace("/", ".");
+
+            const card = (
+              <div className="relative border border-orange rounded-lg mx-auto my-2">
+                <div className="absolute -top-3 -left-3 z-0">
+                  <div className="absolute z-10 w-24">
+                    <Image
+                      src="/assets/image/home/left-top-triangle.png"
+                      alt="arrow_right"
+                      width={200}
+                      height={200}
+                    />
+                  </div>
+                  <div className="absolute left-3 top-3 z-30 text-white">
+                    <p>{date}</p>
+                    <p className="text-xs">{year}</p>
+                  </div>
+                </div>
+                <div className="mx-3">
+                  <div className="min-h-[75px] my-8 md:my-16 mx-10">
+                    <p className="font-bold text-naby line-clamp-2">
+                      {info.title}
+                    </p>
+                    <p className="text-sm mt-2 whitespace-pre-wrap line-clamp-4">
+                      {info.body}
+                    </p>
+                  </div>
+                  {info.url && (
+                    <div className="w-full mb-1 -mt-8">
+                      <Image
+                        className={"w-10 mr-0 ml-auto"}
+                        src="/assets/image/home/arrow-right-orange.png"
+                        alt=">"
+                        width={100}
+                        height={100}
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+
+            return (
+              <div
+                key={info.id}
+                className="w-5/6 md:w-1/3 snap-center flex-shrink-0 mx-4"
+              >
+                {info.url ? (
+                  <Link href={info.url} target="_blank">
+                    {card}
+                  </Link>
+                ) : (
+                  card
+                )}
+              </div>
+            );
+          })}
         </div>
 
         {/*  Section: 診察日・休診日（固定）  ===========================================================  */}
@@ -579,6 +665,10 @@ export const getStaticProps = async () => {
   const dataEvents = await eventClient.get({
     endpoint: "events",
   });
+  const dataClinicInfos = await eventClient.get({
+    endpoint: "clinic-info",
+    queries: { limit: 100, orders: "-date" },
+  });
   const dataNews = await client.get({
     endpoint: "news",
     queries: { limit: 100 },
@@ -594,6 +684,7 @@ export const getStaticProps = async () => {
   return {
     props: {
       events: dataEvents.contents,
+      clinicInfos: dataClinicInfos.contents,
       news: dataNews.contents,
       notifications: dataNotifications.contents,
       books: dataBooks.contents,
