@@ -133,64 +133,70 @@ export default function Home({ events, notifications, news, books }: Props) {
           <SectionTitle
             title="診察日・休診日"
             subtitle="SCHEDULE"
-            complementaryColor={false}
+            complementaryColor={true}
           />
         </>
 
-        <div className="container mx-auto">
-          <div className="w-11/12 lg:w-3/4 mx-auto border border-orange rounded-xl bg-white py-8">
-            <div className="w-11/12 mx-auto">
-              <table className="w-full text-naby text-center text-sm md:text-lg">
-                <thead>
-                  <tr className="border-b-2 border-orange">
-                    <th className="py-3"></th>
-                    {scheduleDays.map((day) => (
-                      <th key={day} className="py-3 font-bold">
-                        {day}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {schedule.map((row) => (
-                    <tr key={row.label} className="border-b border-orange">
-                      <th className="py-4 text-left font-bold whitespace-nowrap">
-                        {row.label}
-                        <span className="block text-[10px] font-normal text-pale_gray md:text-sm">
-                          {row.time}
-                        </span>
-                      </th>
-                      {row.open.map((isOpen, i) => (
-                        <td
-                          key={i}
-                          className={
-                            isOpen
-                              ? "py-4 text-orange text-lg md:text-2xl"
-                              : "py-4 text-pale_gray text-lg md:text-2xl"
-                          }
-                        >
-                          {isOpen ? "○" : "／"}
-                        </td>
+        <div className="bg-orange w-screen pt-28 -mt-36 md:-mt-72 md:pt-48">
+          <div className="mx-auto container">
+            <div className="w-11/12 lg:w-3/4 bg-white rounded-xl my-12 py-8 mx-auto">
+              <div className="w-11/12 mx-auto">
+                <table className="w-full text-naby text-center text-sm md:text-lg">
+                  <thead>
+                    <tr className="border-b-2 border-orange">
+                      <th className="py-3"></th>
+                      {scheduleDays.map((day) => (
+                        <th key={day} className="py-3 font-bold">
+                          {day}
+                        </th>
                       ))}
                     </tr>
+                  </thead>
+                  <tbody>
+                    {schedule.map((row) => (
+                      <tr key={row.label} className="border-b border-orange">
+                        <th className="py-4 text-left font-bold whitespace-nowrap">
+                          {row.label}
+                          <span className="block text-[10px] font-normal text-pale_gray md:text-sm">
+                            {row.time}
+                          </span>
+                        </th>
+                        {row.open.map((isOpen, i) => (
+                          <td
+                            key={i}
+                            className={
+                              isOpen
+                                ? "py-4 text-orange text-lg md:text-2xl"
+                                : "py-4 text-pale_gray text-lg md:text-2xl"
+                            }
+                          >
+                            {isOpen ? "○" : "／"}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <p className="mt-6 text-sm md:text-lg">
+                  <span className="text-orange font-bold mr-3">休診日</span>
+                  {closedDays}
+                </p>
+                <ul className="mt-4 text-xs leading-relaxed list-disc pl-5 md:text-sm">
+                  {scheduleNotes.map((note) => (
+                    <li key={note}>{note}</li>
                   ))}
-                </tbody>
-              </table>
-              <p className="mt-6 text-sm md:text-lg">
-                <span className="text-orange font-bold mr-3">休診日</span>
-                {closedDays}
-              </p>
-              <ul className="mt-4 text-xs leading-relaxed list-disc pl-5 md:text-sm">
-                {scheduleNotes.map((note) => (
-                  <li key={note}>{note}</li>
-                ))}
-              </ul>
-              <div className="mt-6 pt-4 border-t border-orange text-sm md:text-base">
-                <p className="font-bold text-naby">池川クリニック</p>
-                <p>〒236-0035 横浜市金沢区大道2-5-13</p>
-                <p>TEL 045-786-1122</p>
+                </ul>
+                <div className="mt-6 pt-4 border-t border-orange text-sm md:text-base">
+                  <p className="font-bold text-naby">池川クリニック</p>
+                  <p>〒236-0035 横浜市金沢区大道2-5-13</p>
+                  <p>TEL 045-786-1122</p>
+                </div>
               </div>
             </div>
+          </div>
+
+          <div className="text-white font-bold opacity-10 text-7xl text-center lg:text-9xl lg:-mt-8">
+            IKEGAWA
           </div>
         </div>
 
